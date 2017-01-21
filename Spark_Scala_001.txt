@@ -1,0 +1,196 @@
+Objective:
+----------
+
+Familiar with Scala methods + application of MR in SPARK through Scala
+
+Why Spark?
+	=> when there is hadoop
+
+	1. Speed of execution (when compared to hadoop)
+	2. Unified Stack (no extra download needed)
+	3. Polyglot (work with many languages => java, scala, python, r)
+	4. Interactive (have shells)
+	5. Distributed RAM management (RDD)
+	
+Blanket Statement:
+-----------------
+1. Spark is 100 times faster than hadoop [mapreduce] [in-memory]
+2. Spark is 10 times faster [on disk]
+3. Testing done [on Logistic Regression]
+
+Speed of Execution:
+-------------------
+Is it Really [100 times] Faster? conditions applied
+
+	=> in a identical cluster[HardWare is constant] => you wont get 100 times speed
+	=> a special cluster with Huge Ram [in-memory] => you get XX times speed
+		=> 10 GB file => a.txt ; 10 GB file => b.txt ; JOIN between a and b => you need 20 GB RAM.
+		=> spark uses virtual memory [fancy word for a part on hdd; swap]
+		
+	If so, From where the speed came?
+		
+		=> Good Cluster => Heavy RAM
+	
+Is it Really [10 times] Faster? conditions applied, due to software
+
+	=> in a identical cluster [HardWare is constant] => you wont get 10 times speed 
+	=> in a identical cluster [HardWare is constant] => you wont get X times speed 
+
+	If so, From where the speed came?
+	
+		=> Software ; SHELL + DAG + RDD (distributed RAM)
+
+			=> Shell => it prepares your environment upfront [already the resources are allocated]
+			
+				some steps are avoided:
+					1. code [java]
+					2. compile [javac]
+					3. build [jar]
+					4. deploy [location]
+					5. execute [hadoop jar]
+
+				Tools which avoided them are mostly have shells => interactive command line interfaces
+					=> sql plus; pig
+					
+				Shell => avoids the start up time => as it already allocated the resources => start up time is little
+				Shell => interactive environment => easy to modify
+				
+			=> DAG => Directed Acyclic Graph => a fancy name for a straight forward trip [not a round trip]
+					=> A => B => C => D => E => Result [no loop here]
+					=> execution does not start until it gets the complete code
+					=> steps => transformations or actions
+				
+				example: assume we have to do 3 works in bommanahalli, silkboard and BTM 
+					1. approach 1 => 
+						go to bommanahalli => do work => come home
+						go to silkboard => do work => come home
+						go to BTM => do work => come home
+
+					2. approach 2 => 
+						go to bommanahalli do work => go to silkboard do work => go to BTM do work => come home
+						
+					execution nevers starts utils system knows the "come home" instruction
+
+			=> RDD (a core concept used in distributed RAM)
+				HDFS => distributed storage management (HDD)
+				MR => distributed process management (cpu+ram)
+
+				RDD => distributed ram management (ram)
+					RDD => Resilient Distributed DataSet => a very special object which can live in multiple machine RAMs.
+					
+					example: 6GB object is there, 2 machines are there, one with 2GB heap space(ram) other with 4GB(heap)
+
+						Hadoop => no distributed ram mechanism => therefore cannot keep 6GB object
+						Spark => RDD => can keep the 6GB big object
+
+					RAM is faster than HDD;
+					RAM => data is available in the form of objects (faster)
+					HDD => data is available in the form of files (slower)
+
+					OLD => keeping objects in ram
+					NEW => keeping one object in multiple rams
+
+Is it Really [X times] Faster?
+
+	=> Not Always => WordCount => doesnt yield that X speed
+	=> Always => Logistic Regression => YES
+	
+	=> If so, From where the speed came?
+	
+			USE CASE + ALGORITHM
+			
+			Speed is coming from a special Algorithm.
+				An Alogrithm => which uses a lot of iterations
+				
+				example: give me the prime numbers between 1,00,000 to 2,00,000
+				
+					hadoop => we do iterations => one by one => file by files are there
+					spark => we do iterations => no intermediate files => only input file + output file
+					
+2 Cars in the market:
+
+	1. Hyndai i10 => 0.4 million => takes you from A to B => Hadoop
+	2. Lambhorgini Veneno => 40 million => takes you from A to B => Spark
+
+2 Kids in the world:
+	Rich and Normal
+
+	IF only hyundai is there, even though the rich kid has money cannot have a better one.
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
