@@ -1,0 +1,9 @@
+// this program is designed to give error
+// to show that a value defined using val cannot be redefined in code
+// you will get error at "val x = 20" line
+// but this redefinition to the same name is possible in interactive shell
+
+// you dont need to compile the code before execting it
+// scala can directly execute a code file
+// $ scala Test.scala -- it works, noneed to do "scalac"
+
