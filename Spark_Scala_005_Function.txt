@@ -1,0 +1,63 @@
+Functions behave like functions and variables.
+
+We can pass functions like parameters. 
+
+If a function is there in a code line it executes it first then store the return value in the variable name.
+
+Examples: Test.scala; Test1.scala; Test2.scala
+
+-----Test.scala
+
+object Test {
+   def main(args: Array[String]) {
+        delayed(time());
+   }
+
+   def time() = {
+      println("Getting time in nano seconds")
+      System.nanoTime
+   }
+   def delayed( t: => Long ) = {
+      println("In delayed method")
+      println("Param: " + t)
+      t
+   }
+}
+
+-----Test1.scala
+
+object Test1 {
+   def main(args: Array[String]) {
+        time();
+   }
+
+   def time() = {
+      println("Getting time in nano seconds")
+      var upendra  = System.nanoTime
+      println("next line to nano time")
+      println(upendra)
+   }
+   def delayed( t: => Long ) = {
+      println("In delayed method")
+      println("Param: " + t)
+      t
+   }
+}
+
+-----Test2.scala
+
+object Test {
+   def main(args: Array[String]) {
+        println("my final line: " + delayed(time()));
+   }
+
+   def time() = {
+      println("Getting time in nano seconds")
+      System.nanoTime
+   }
+   def delayed( t: => Long ) = {
+      println("In delayed method")
+      println("Param: " + t)
+      t
+   }
+}
