@@ -1,0 +1,149 @@
+Spark and Scala:
+----------------
+
+Language Classification: based on ease-of-use to humans
+
+Low Level => understandable by computer not by human. ex: machine language [000100010]
+Mid Level => so so understandable by both computer and human. ex: c language [abc.c;abc.obj;abc.exe] [int i]
+High Level => not understandable by computer and understandable by human. ex: java language [cycle c; human h]
+
+Script Level => not only human understandable but it also assumes human intention. 
+				rules are a bit relaxed. ex: javascript language, vb script, scala, python, r
+				code looks very small. [var a = 15]
+
+if the code is big => we can go through and understand what is happening. 
+						But writing code will take more time, error prone.
+						
+if the code is small => few lines of code is needed. easy to write.
+						Since its consice nature, you need know upfront meaning of the shortcut.
+						abc(_+_); difficult to debug for a new guy
+				
+
+Java has only BATCH mode.
+Java is an OBJECT ORIENTED Language.
+Java is a high level language
+
+Scala has both INTERACTIVE and BATCH
+	> INTERACTIVE > commands
+	> BATCH > code, compile, build, deploy, execute
+Scala is both OBJECT ORIENTED and FUNCTIONAL language.
+
+HelloWorld Program:
+-------------------
+
+1. To enter into scala prompt, we need to start the scala shell
+	a. Open Terminal on the linux machine
+	b. type "scala" (without quotes)
+	c. this will take you to scala shell
+	d. you will see a prompt like "scala>"
+	e. on the prompt we can type the commands
+	
+example:
+
+scala> print("HelloWorld")
+HelloWorld
+
+Note: no need to use semi-colon as a termination character, system will understand
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
