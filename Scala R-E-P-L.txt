@@ -1,0 +1,198 @@
+Scala R-E-P-L Notes: [Read-Evaluate-Print-Loop] an interactive shell
+
+
+// scala is a calculator at the heart of it
+scala> 10 + 3 * 5 / 2 
+
+// create a string on the fly
+// add or concatenate it with the earlier answer
+scala> "Your answer " + res0
+
+// create variables
+scala> var myName = "Jagadish"
+
+// create constants [assigned value wont change]
+scala> val myAge = 80
+
+// data types available are [not primitives, all are objects]
+// scala is a pure object oriented language; but java has primitives
+Byte, Short, Int, Long
+Float, Double
+Char, Boolean
+
+// comments [just like java]
+// single line comment
+/*
+   multiline comment
+*/
+
+// doubles has 15 digits of precision
+// creation of BigInt
+scala> val longPrime = BigInt("235711131719235711131719235711131719235711131719")
+
+// add value 1 to the longPrime to check the BigInt capabilitiesƒ
+scala> longPrime + 1
+
+// in scala every thing is an object; either Byte or value 2
+// auto-complete using tab
+// use dot + tab to see the available methods for the object
+scala> Byte.maxValue
+scala> 2.abs
+
+// scala REPL has integers by default, below problem yeilds 3 instead of 3.14
+scala> 22/7
+
+//* to get float value for pi [dont know]
+scala> 
+
+// store a bigdecimal
+scala> val myDecimal = BigDecimal("1.2345678923456789234567892345678923456789")
+
+// add a penny value to it
+scala> myDecimal + 0.0000000000000000000000000000000000000001
+
+// provide a data type explictly
+// complete declaration like name, data type and value
+scala> val name:String = "Kumar"
+
+// only name and value
+scala> val name = "Kumar"
+
+// only value
+scala> "Kumar"
+
+// good news is you can directly copy paste the commands with prompt here [scala>]
+// system has the intelligence to understand. cntl + d to finish
+
+// basic arithmetic and usage of polymorphism
+// output may confuse you with 2 equal signs
+scala> "3 + 2 = " + (3 + 2)
+
+scala> "3 - 2 = " + (3 - 2)
+
+scala> "3 * 2 = " + (3 * 2)
+
+scala> "3 / 2 = " + (3 / 2)
+
+scala> "3 % 2 = " + (3 % 2)
+
+//scala doenst support itenary characters like ++ or -- 
+//instead you need to use the sum += 1 => sum = sum + 1
+scala> var randInt = 100000
+scala> randInt += 1
+scala> randInt -= 1
+scala> randInt *= 1
+scala> randInt /= 1
+
+// different feedbacks
+scala> var upendra = 10
+
+// does the activity + print the output to console
+scala> upendra = upendra + 1
+
+// does the activity + no console feedback
+scala> upendra += 1
+
+//only declarations are displays in terminal like res0 etc.
+//normal incrementation is not showing the result on terminal
+//system detected REPL transcript; cntl + d to close
+
+//import a library; here its math library
+//underscore signifies every class in the package [similar to * in java]
+scala> import scala.math._ 
+
+//now lets do those math functions
+//absolute
+scala> abs(-8)
+
+//cube root
+scala> cbrt(27)
+
+//square root
+scala> sqrt(4)
+
+//ceil
+scala> ceil(5.45)
+
+//floor
+scala> floor(5.45)
+
+//round
+scala> round(5.45)
+
+//value of e
+scala> exp(1)
+
+//power
+scala> pow(2, 2)
+
+//sqrt with fun
+scala> sqrt(pow(3, 2) + pow(4, 2))
+
+//hypotenus
+scala> hypot(3, 4)
+
+//log to base 10
+scala> log10(1000)
+
+//log to base e
+scala> log(2.718281828459045)
+
+// min or max applied to only 2 parameters
+
+//min
+scala> min(5, 10)
+
+//max
+scala> max(1, 1000)
+
+//random, gives a value from 0.0 to 1.0
+scala> random
+
+//to produce a value from 1 to 10, some intersting simple logic
+scala> (random * (11 - 1) + 1).toInt
+
+//radians
+scala> toRadians(90)
+
+//degrees
+scala> toDegrees(1.5707963267948966)
+
+//conditional operators or relational operatores
+== != > < >= <=
+
+scala> var age = 18
+
+scala> val canVote = if(age >= 18) "yes" else "no"
+
+//we need to use curly braces in REPL, as terminal need to allow us in next line
+scala> if((age >=5) && (age <= 6)){
+	println("Go to kindergarten")
+	} else if((age > 6) && (age <= 7)){
+	println("Go to grade 1")
+	} else {
+	println("Go to grade " + (age - 5))
+	}
+
+
+//logical operators like AND OR NOT
+&& || !
+
+
+
+
+
+
+
+
+
+Challenges:
+----------
+1. How to store the pi value in a scala variable from a calculation like 22/7 in REPL?
+2. Multi-Line comments are behaving differently than expected.
+3. MaxValue for BigInt. Its an object.
+4. Why do we need postFixOps? import scala.language.postfixOps
+5. List down diagnostics operators on functions. Like `cbrt _` gives little definition of return typehy
+
+
+
