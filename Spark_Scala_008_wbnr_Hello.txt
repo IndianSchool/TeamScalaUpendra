@@ -1,0 +1,195 @@
+// Hello Buddies, Welcome again
+
+// to get the history of commands used [similar to VI, many commands have a colon :]
+scala> :history
+
+// scala always has 2 modes; think of them like 2 option on your gas stove
+// slim -> option1; high -> option2
+
+######################################################################
+// Lets write our first program
+
+// Java HelloWorld, only one way
+
+public class HelloWorld {
+	public static void main(String args) {
+		System.out.println("Hello, World!");
+	}
+}
+
+// Scala HelloWorld, simpler way, declarative programming style
+
+println("Hello, World!")
+
+// Scala HelloWorld, traditional way, imperative progamming style
+
+object HelloWold{
+	def main(args: Array[String]){
+		println("Hello, World!")
+	}
+}
+
+######################################################################
+// Scala, a hybrid between OOPS and FL
+// Scala, Perfected Java(doesn't allow you to change an input variable of a function inside it. ex: hello(int a){ a = 10;} ) 
+// Scala, Effective Java(system decides whether to use concurrency model or sequential model)
+// Scala, Consice Java(helps to write less code)
+
+
+// Scala omits, i.e. we dont need them
+1. semi-colons, ";" no need, new-line is termination character
+2. curly-braces, "{}" no need, for one liners
+3. return-keyword, "return" no need, last line expression is return type
+
+
+// Scala continues, i.e. same as java
+1. zero-index, all elements start from 0
+2. Naming conventions, Files/Class names start with Capital Letter
+######################################################################
+// even we can do this fun
+scala> "####################################################################".length
+
+// total prices example
+
+scala> val prices = List(10, 15, 20, 25, 30, 35, 40)
+
+def totalPrices(prices: List[Int]) = {
+	var total = 0 
+	var count = 0
+	for(price <- prices) {
+		total = total + price
+		count = count + 1
+		println("current total " + total) 
+	}
+	total; // count
+}
+
+println(totalPrices(prices))
+
+NOTE: READ '<-' as ASSIGN, easy to memorize
+NOTE: Last Expression in the Last Line is the RETURN value
+
+// total prices over 25 example
+
+def totalPricesOver25(prices: List[Int]) = {
+	var total = 0 
+	var count = 0
+	for(price <- prices) {
+		if(price >= 25) 
+		total = total + price
+		count = count + 1
+		println("current total " + total) 
+	}
+	total; //count
+}
+
+println(totalPricesOver25(prices))
+
+// total prices under 25 example
+
+def totalPricesUnder25(prices: List[Int]) = {
+	var total = 0 
+	var count = 0
+	for(price <- prices) {
+		if(price < 25) 
+		total = total + price
+		count = count + 1
+		println("current total " + total) 
+	}
+	total; // count
+}
+
+println(totalPricesUnder25(prices))
+
+// Lets kick in the functional programming
+
+scala> prices
+
+scala> println(prices)
+
+scala> prices(2)
+
+scala> prices.map(e => e + 1)
+
+scala> prices.map(v => v * 2)
+
+NOTE: MAP is a function can be used to TRANSFORM a particular INPUT to a particular OUTPUT on EVERY ELEMENT
+NOTE: READ "=>" as TRANSFORM, to memorize
+
+scala> prices.map(a => true)
+
+scala> prices.map(a => a > 25)
+
+scala> prices.map(a => a < 25)
+
+// higher-order-function, a function accepts another function
+
+def totalPrices(prices: List[Int], selector: Int => Boolean) = {
+	var total = 0 
+	for(price <- prices) {
+		if(selector(price)) total = total + price
+		println("current total " + total) 
+	}
+	total
+}
+
+println(totalPrices(prices, { prices => prices > 25}))
+println(totalPrices(prices, { prices => prices < 25}))
+
+// prices, is an object of type list
+// selector, is an object of type function
+
+// to print the elements too which passed the test
+def totalPrices(prices: List[Int], selector: Int => Boolean) = {
+	var total = 0 
+	for(price <- prices) {
+		if(selector(price)) { 
+			println("element is : " + price)
+			total = total + price
+			println("current total " + total) 
+		}
+	}
+	total
+}
+
+
+
+// a simple class
+
+class Human(val name : String) {
+	def listen() = println("I'm " + name + " listening")
+}
+
+val upendra = new Human("Upendra")
+val jyothi = new Human("Jyothi")
+
+// factorial example, multiple ways
+
+
+Challenges:
+-----------
+1. How to select a range for a list? like prices(1 untill 4)?
+2. How to send a Boolean vector as an input to another vector?
+3. Why there is no compile error when I forgot to put close brace? 
+	like if(selector(price)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
