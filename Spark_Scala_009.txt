@@ -1,0 +1,191 @@
+Agenda:
+-------
+Functions
+
+Observations:
+1. Scala, Python, R; spark supports java/scala/python/r => data science
+1a. Java, scala => big data technologies 
+
+spark => shell/terminal
+	spark-shell => scala terminal
+	pyspark => python terminal
+	sparkR => R terminal
+	java => nothing is there => normal program + import libraries
+
+Java => we have traditional steps / ceremonial steps / boiler plate
+	boiler plate => a prequesite before cooking
+
+if code is this:
+----------------
+public class JagadishWorld{
+	public static void main(String args[]){
+		System.out.println("Hello, Jagadish!");
+	}
+}
+
+then, boiler plate is:
+----------------------
+public class JagadishWorld{
+	public static void main(String args[]){
+
+	}
+}
+
+1b. Scala => is consice, tries to avoid the boiler plates
+
+2. Scala => for sure it will grow
+		it modular => SCAlable LAnguage (core concept)
+		scala today => scala 1
+		scala tomorrow => bigdata => scala 2 => spark
+		scala itself has ecosystem
+		scala => some version => streaming => akka
+		spark => scala + akka 
+3. Hadoop and Spark are having HYPE together in the current times
+
+scala> var i = 1 to 5;
+
+scala> print(i)
+
+scala> for(j <- i) print(j)
+
+scala> for(j <- i) println(j)
+
+scala> for(i <- 20 to 30) println(i)
+
+scala> for(i <- 20 to 30) println(i+2)
+
+
+// Break & Continue are not there in Scala
+// while => if + loop
+
+// var i = 10
+// val j = 20
+// def sumAll = {i+j}
+
+When we talk about functions:
+1. Naming => declaration
+2. Input => parameters
+3. Output => return types
+4. Body => definition
+
+def jyothiFunc(s:String):String = {s}
+def jyothiFunc(s:String):String = {s+" Madam"}
+
+scope: in the active session, we can use
+
+print("Upendra Says: " + jyothiFunc("Hello Jyothi"))
+
+Note:
+----
+int i; => normal
+i:Int => scala => reverse
+
+// GuessMe, a function reads input from the console
+
+def guessMe() = {
+
+	var count = 0; var i = 0;
+
+	println("Please guess the number...")
+
+	// i = readLine.toInt
+	// above readLine is deprecated
+
+	i = scala.io.StdIn.readLine.toInt
+
+	while(i != 15){
+		println("oh! no, that's[" + i + "] not the right number")
+		if(count >= 3) println("hint: its between 1 and 15")
+		count += 1
+		println("Try Again -> ")
+			i = scala.io.StdIn.readLine.toInt
+		}
+
+	if (i == 15){
+		println("Voila, you made it. 15 is the secret number")
+	}
+
+}
+
+
+NOTE: guessMe or guessMe() both works the same; braces are optional ()
+1. scala.io.StdIn.readLine
+
+other possibilites:
+
+readBoolean   readDouble   readLine    readf    readf3   
+readByte      readFloat    readLong    readf1            
+readChar      readInt      readShort   readf2  
+
+// same guessMe functionality implemented in main method of object
+
+object ScalaTutorial{	
+
+def main(args: Array[String]) = {
+
+	var count = 0; var i = 0;
+
+	println("Please guess the number...")
+
+	// i = readLine.toInt
+	// above readLine is deprecated
+
+	i = scala.io.StdIn.readLine.toInt
+
+	while(i != 15){
+		println("oh! no, that's[" + i + "] not the right number")
+		if(count >= 3) println("hint: its between 1 and 15")
+		count += 1
+		println("Try Again -> ")
+			i = scala.io.StdIn.readLine.toInt
+		}
+
+	if (i == 15){
+		println("Voila, you made it. 15 is the secret number")
+	}
+
+}
+}
+
+
+NOTE: import statements; class and method level
+// one method
+import scala.io.StdIn.readLine
+// mutiple methods
+import scala.io.StdIn.{readLine, readInt}
+// all methods
+import scala.io.StdIn._
+
+// handle the excpetion when the use enters a string instead of a number
+
+
+
+Challenges:
+-----------
+1. Is it ture? that I cannot use the variable until I initialise it?
+	var i = 10; then use it like i =20;
+	BUT, var i; i = 10 may not work
+	TRUE?
+2. Why I am unable to see the standard input? Not able to see my input 3,4 or 15.
+Ans: its appearing when you are using and object + main method.
+Not appearing when running the function directly on the REPL
+3. I can able to create an object in scala REPL, but why I am not able to execute it?
+4. Why sometimes braces are ignored in the calls for functions?
+	ex:
+		scala> def newSum = {i + j + 1}
+		scala> newSum // works fine
+		scala> newSum() // error
+
+
+
+
+
+
+
+
+
+
+
+
+
+
