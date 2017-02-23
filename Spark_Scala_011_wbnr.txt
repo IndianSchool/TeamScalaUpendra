@@ -1,0 +1,179 @@
+Hello Friends, Welcome Back
+
+Recording Started:
+------------------
+
+Let us Continue with the FUNCTIONS:
+
+Functions with Variable Arguments:
+
+one arugument or two arguments to a function
+
+some time we may not know how many arguments will come, so need a dynamic argument.
+
+i = i + 1;
+
+i += 1; put the operator before the equal sign
+
+Functions with Named Arguments:
+
+Recursive Functions:
+
+object DemoRecursion {
+	
+	def main(args: Array[String]) {
+		for (i <- 1 to 5)
+			println( "Factorial of " + i + ": = " + factorail(i) )
+	}
+
+	def factorial(n:BigInt): BigInt = {
+		if (n <= 1)
+			1
+		else
+			n * factorial(n - 1)
+	}
+}
+
+---------------------------------------------------------------------------------------
+
+0! = 1
+1! = 1
+2! = 2
+3! = 6
+4! = 24
+5! = 120
+
+5 enters first:
+
+n * factorial(n - 1)
+---------------------
+5 * factorial(5 - 1)
+5 * factorial(4)
+---------------------
+5 * factorial(4)
+5 * (4 * factorial(4 - 1))
+5 * (4 * factorial(3))
+---------------------
+---------------------
+---------------------
+5 * (4 * 3 * 2 * factorial(1)
+5 * (4 * 3 * 2 * 1)
+5 *
+	4 *
+		3 *
+			2 *
+				1
+Stack => seperate memory => functions will stay
+Heap => seperate memory => objects will stay
+
+StackOverFlow.com => 1GB => stack reaches beyond 1 GB => runtime error
+
+// nested factorial example implementation
+
+def fact(i:Int, accumulator: Int) : Int = {
+	if( i <= 1)
+		accumulator
+	else
+		fact( i - 1, i * accumulator)
+
+}
+
+fact(i,1)
+
+fact(3,1) => fact(3-1, 3 * 1) 
+	=> fact (2,3) => fact(2-1, 2 * 3) 
+		=> fact(1, 6) => 6
+
+Done With Nested Functions
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

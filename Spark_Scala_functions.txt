@@ -1,0 +1,539 @@
+Scala Functions:
+----------------
+
+Functions and Their Varieties:
+
+Function(an executable code with a name can be assigned to variable) 
+	Vs Method (member of a classs/object)
+		Vs Procedure (a funtion with no return type, i.e UNIT type)
+
+A function, which is defined as a member of some object is called a method.
+
+Expression (sum or a+b)
+	Vs Equation (sum = a + b) [an equation always has an equal sign]
+
+// Expression can be written any where in scala program, they will get evaluated, but a warning will be there 
+// 4 +5 is in the middle, out of function, but works with WARN, (def a = {1+2} def; 4+5; b = {2+3})
+// "warning: a pure expression does nothing in statement position; multiline expressions may require enclosing parentheses"
+
+// Expression can be written only as last line in scala function (not anywhere)
+// Expression are the one which return in the functions (not equations)
+// Expression in the last line of function == return type of function (last is return)
+
+
+// example of function, sumIt
+def sumIt(a:Int, b:Int) = {a+b}
+
+// remember, without "=" sign it would return Unit which is unusable [like VOID in JAVA]
+// remember, variable declaration is reverse ["a:Int" instead of "int a;"]
+
+Function name can have any of the below special characters in its name.
++, ++, ~, &, -, --, \, /, :, etc.
+
+def sumIt(a:Int, b:Int):Int = {a+b}
+// explicit mention of return type
+
+// example of method, addIt
+object add {
+	
+	def addIt(a:Int, b:Int) : Int = {
+	var sum:Int = 0
+	sum = a + b // this fails as its equation
+	}
+}
+
+// this works
+object add {
+	
+	def addIt(a:Int, b:Int) : Int = {
+	var sum:Int = 0
+	sum = a + b
+	sum // variable name
+	}
+}
+
+// this also works
+object add {
+	
+	def addIt(a:Int, b:Int) : Int = {
+	var sum:Int = 0
+	sum = a + b
+	b - a // expression
+	}
+}
+
+// By design, all the input variables are static values [they are VALs not VARs]
+// We must intialize the variables inside function or else they cant be defined (var i = 10;)
+// only classes can have declared but undefined members
+// example of UNIT or VOID, main method
+object Demo {
+	
+	def main(args: Array[String]) {
+		println( "Returned Value : " + addIt(5,7) );
+	}
+
+	def addIt( a:Int, b:Int ) : Int = {
+		var sum = 0 			// doesn't work without initialization [= 0]
+		sum = a + b
+		sum
+	}
+} 
+
+// able to create this object in shell
+// but how to invoke it
+
+// Demo.addIt(1,2) // this works
+// Demo.main // it doesn't, then is it possible to invoke main from shell?
+
+Functions are very important in Scala. Let us check them.
+
+1. Functions with Call By Name:
+-------------------------------
+
+// pass function as a paramter
+// this feature is exactly same in R
+// var a = 10L, you can pass literal or variable
+// simillarly, def time() = {10L}, you can pass body or function_name
+
+object DemoCallByValue {
+	
+	def main(args: Array[String]) {
+		
+		var a:Long = 123123123123L
+
+		delayed(time()) // pass function as parameter
+		delayed(123456789101112L) // pass value/literal as parameter
+		delayed(a) // pass variable as parameter
+		delayed(	{println("Hello, World"); 10L}	) // cant pass code, We CAN happily
+	}
+
+	def time() = {
+		println("Getting time in nano seconds")
+		System.nanoTime
+	}
+
+	def delayed( t: => Long ) = {
+		println("In delayed method")
+		println("Param: " + t)
+	}
+}
+
+Note: we pass a code block as a parmeter
+whenever the call access the parameter, the code block is executed and the value is calculated
+Not just capturing the return value, it executes it there.
+
+
+2. Functions with Variable Arguments:
+-------------------------------------
+// note: similar kind of thing is there in JAVA, "String[] args" or Elipses "String... args"
+// last parameter to the function can be of variable length, like 0 or many
+
+object DemoVariableLength {
+	
+	def main( args: Array[String]) {
+		printStrings("Hello", "Java", "R")
+		printStrings("Hello", "Java", "R", "Scala", "Python")
+		printStrings()	// zero length
+		printStrings("only me")
+	}
+
+	// declared only one param but it is of variable length [elastic size]
+	def printStrings( words: String* ) = {
+
+		var i : Int = 0
+		for( word <- words) {
+			println("Arg value[" + i + "] = " + word)
+			i = i + 1
+		}
+	}
+}
+
+// remember, i++ kind of iterators are not there in scala insted "i = i + 1"
+// String* is an array of strings with variable length
+// * , star tells its a variable lenght data type [array wiht elastic size]
+
+3. Functions with Default Parameters:
+-------------------------------------
+// you can define default parameters which will be used if no input is passed
+// this feature is exactly same in R
+
+object DemoDefaultParams {
+	
+	def main(args: Array[String]) {
+
+		println("Returned Value : " + addInt() );	// defaults are used here
+		println("Returned Value : " + addInt(3,4) );
+	}
+
+	def addInt( a:Int = 5, b: Int = 8 ) : Int = {
+		a + b
+	}
+}
+
+// another silly example which leads to ambiguity, can be fixed with named value
+
+object DemoDefaultParams {
+
+        def main(args: Array[String]) {
+
+                println("******ADDITION******")
+                println("Returned Value : " + addInt() );
+                println("Returned Value : " + addInt(3,4) );
+
+                println("******MULTIPLICATION*****")
+                println("Returned Value : " + prodInt(3,3));
+                println("Returned Value : " + prodInt(4));
+                println("Returned Value : " + prodIntRev(4)); // this fails as situation is ambiguous.
+                // is it first param? then where is 2nd one
+                // do i need to consider this as 2nd param because first one some default is there
+        }
+
+        def addInt( a:Int = 5, b: Int = 8 ) : Int = {
+                a + b
+        }
+
+        def prodInt( x:Int , y:Int = 4 ) = {
+                x * y
+        }
+        def prodIntRev( x:Int = 4 , y:Int ) = {
+                x * y
+        }
+}
+
+4. Functions with Named Arguments:
+----------------------------------
+// when you name the parameters, then any order is fine
+
+object DemoNamedOrder {
+	
+	def main(args: Array[String]) {
+		printSomething(10,20)
+		printSomething(second=10, first=20)
+	}
+	def printSomething(first:Int, second:Int) = {
+		println("First param is : " + first + " and Second param is : " + second)
+	}
+}
+
+
+5. Functions with Recursion:
+----------------------------
+// recursion means a function can call itself repeatedly
+// internally a stack will be formed and one by one returns the value sequentially
+
+object DemoRecursion {
+	
+	def main(args: Array[String]) {
+		for (i <- 1 to 10)
+			println( "Factorial of " + i + ": = " + factorail(i) )
+	}
+
+	def factorial(n:BigInt): BigInt = {
+		if (n <= 1)
+			1
+		else
+			n * factorial(n - 1)
+	}
+}
+
+6. Functions with Nested Functions:
+--------------------------------
+// functions which are defined inside a function, such are called LOCAL FUNCTIONS
+// like LOCAL variables the scope/visibility of this function is inside the {} of above function
+
+object DemoNestedFactorial {
+	
+	def main(args: Array[String]) {
+		println( factorial(0) )
+		println( factorial(1) )
+		println( factorial(2) )
+		println( factorial(3) )
+	}
+
+	def factorial(i:Int):Int = {
+		// a nested function, coincidentally its a recursive one
+		def fact(i:Int, accumulator: Int) : Int = {
+			if( i <= 1)
+				accumulator
+			else
+				fact( i - 1, i * accumulator)
+
+		}
+
+		fact(i,1)
+	}
+}
+
+// a simple example
+object DemoNestedSimple {
+	
+	def main(args: Array[String]) {
+		println( doSomething(3,4) )
+	}
+
+	def doSomething(i:Int, j:Int):Int = {
+		// 2 functions defined here
+
+		def addIt(a:Int, b:Int) : Int = { a + b	}
+		def prodIt(a:Int, b:Int) : Int = { a * b }
+
+		addIt(i,j) + prodIt(i,j)
+		}
+}
+
+7. Functions with Currying:
+---------------------------
+// currying, talks about the arrangement of brackets, like def doIt(a:Int)(b:Int), name is
+// curried functions are defined with MULTIPLE PARAMETER LISTS
+// we can define more than 2 parameters or [list]
+// partially implement a function now and create a new function on it, purpose is
+// call the new funtion with full implementation
+// note: many paranthesis group can form
+
+object DemoCurrying {
+	def main(args: Array[String]) {
+		var result = add(10)(10)
+		println("10 + 10 = " + result)
+
+
+		// pass one param, other is left, underscore is wild character
+		var addIt = add(10)_
+		var result2 = addIt(3)
+		println("10 + 3 = " + result2)
+	}
+
+	// if its one line brackets are optional
+	def add(a:Int)(b:Int) = a+b
+}
+
+// naturally, def doIt(a:Int)(b:Int) = a + b
+// alternatively, def doIt(a:Int) = (b:Int) => a + b
+
+object DemoCurrying2 {
+	def main(args: Array[String]) {
+		var result = add(10,20)(10,30)
+		println("10,20,10,30 = " + result)
+
+
+		// pass one param, other is left, underscore is wild character
+		var addIt = add(10,90)_
+		var result2 = addIt(10,80)
+		println("10,90,10,80 = " + result2)
+
+	}
+
+	// if its one line brackets are optional
+	def add(a:Int,c:Int)(b:Int,d:Int) = (a+b) * (c+d)
+}
+
+// order of parameters list is important, first one needs to be done first then second
+// underscores are not for individual prams, like addIt(10,_)(10,20), wont work
+// you cant run the second param list first, like addIt_(10,20), wont work
+
+8. Functions with Higher Order:
+-------------------------------
+// pass function as parameter to other function, and apply other param dynamically
+
+object DemoHigherOrder {
+
+    def addIt(a:Int, b:Int):Int = { a+b }
+    def subIt(a:Int, b:Int):Int = { b-a }
+    def prodIt(a:Int, b:Int):Int = { a+b }
+
+    def main(args: Array[String]) {
+
+        println(doIt(addIt,1,2))
+        println(doIt(subIt,3,4))
+        println(doIt(prodIt,5,6))
+
+    }
+
+    def doIt(fn:(Int,Int) => Int, p:Int, q:Int) : Int = {
+        fn(p,q)
+    }
+}
+
+9. Functions which are partially applied:
+-----------------------------------------
+// sometimes you may not have all the arguments available to pass, so you can pass few
+// Any, is super class for all data type classes -- show object orientedness
+// partial -- show functional behaviour
+// second parameter is not known yet
+
+// use underscore as a wild character
+
+object DemoPartial {
+	def main(args: Array[String]) {
+		val piF = 22f/7f
+		val piD = 22d/7d
+		var str = "Value of pi in "
+		information(str, " float is ", piF)
+		information(str, " double is ", piD)
+
+		println("*********INSIGHT*********")
+
+		val insight = information(str, _ : String, _ : Any)
+		insight(" double is ", piD)
+		insight(" float is ", piF)
+	}
+
+	def information(a:String, b:String, c:Any) = {
+		println(a + b + c)
+	}
+}
+
+10. Functions which are Anonymous or Lambdas:
+---------------------------------------------
+// Anonymous, when you dont want to reuse it, so dont name it
+// Scala provides a relatively lightweight syntax for defining anonymous functions. 
+// Anonymous functions in source code are called FUNCTION LITERALS and at run time, 
+// function literals are instantiated into objects called function values.
+
+// Scala supports first-class functions, 
+// which means functions can be expressed in function literal syntax, i.e., (x: Int) => x + 1,
+// and that functions can be represented by objects, which are called function values.
+
+
+// can be created using rocket (=>) or underscore (_)
+
+object DemoAnonymous {
+	def main(args: Array[String]) {
+
+		var result1 = (a:Int, b:Int) => a + b
+
+		var result2 = (_:Int)+(_:Int)
+
+		println(result1(10,10))
+		println(result2(10,20))
+
+	}
+}
+
+// other examples
+
+// one param
+var inc = (x:Int) => x+1
+var x = inc(7)-1
+
+// two param
+var mul = (x: Int, y: Int) => x*y
+println(mul(3, 4))
+
+// no param
+var userDir = () => { System.getProperty("user.dir") }
+println( userDir )
+
+// NOTES
+Earlier Languages: 
+	c => only data
+	java => data + methods
+	scala => data + funtion + object
+
+	In Java, object can hold a value [along with object specific members], String s = "jaga";
+		String s1 = s.lower(); returns an object; s has methods; s has[is] value;
+
+	In Scala, function can hold a value [along wiht function specific things], def a = 1 + 2;
+		def a = 10;
+		def a = {1 + 2} 
+		def a = {println("hello"); 1 + 2} 
+		def a() = {println("hello"); 1 + 2} 
+		def a(i:Int) = {println("hello"); i } 
+		def a(i:Int, j:Int) = {println("hello"); i + j} 
+		def a(i:Int, j:Int):Int = {println("hello"); i + j} 
+		def a(i:Int, j:Int):Unit = {println("hello"); } 
+		def a(i:Int, j:Int) {println("hello"); } 
+
+c or java => int i;
+scala => reverse => i:int
+
+Challenges:
+----------
+1. Can't I pass function code block as a parameter.
+Ans: You can, dont mention is name and signature, to make it anonymous function
+	Anonymous function, a function without name and used for time being
+		delayed(	def hello() : Long = {println("Hello, World"); 10L}	) // wrong way
+		delayed(	{println("Hello, World"); 10L}	) // right way
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
