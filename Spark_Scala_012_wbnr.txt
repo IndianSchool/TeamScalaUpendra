@@ -1,0 +1,245 @@
+Hello All, Good Evening.
+
+Continue the Functions:
+-----------------------
+
+Functions ; Loops
+
+
+Recap:
+------
+
+Object[only one instace is allowed] vs Class[normal]
+
+def hello(a:Int, b:Int) = {a + b} ; does this function returns a value? It returns "= sign means returns"
+
+To make the above function void, what to do? remove = sign
+
+give me the syntax to print 1 to 10 numbers?
+
+Functions with Currying:
+------------------------
+
+What is Currying? Making Curry? :-)
+
+two step parameterization. 2 sets of parameter_list. "xyz()()"
+
+a,b => c,d => fn // if I wrote funcitons with rocket syntax(=>), they are called first class functions
+
+Tables and Views:
+	one of reason people use views is SECURITY.
+
+	CREATE TABLE login(userid VARCHAR, age INT, email VARCHAR, password VARCHAR);
+
+		sql> select userid, password from login; -- actually we have 4 columns
+
+		view:
+		sql> CREATE VIEW masked_login AS SELECT userid, email FROM login;
+
+		sql> select * from masked_login; -- read itself we are afraid of givin it
+
+partially allowed data access by creating an intermediate table kind of thing(view).
+ 
+functions => processing => we need provide logic + data (input param)
+
+scala> def divIt(a:Int)(b:Int) = b/a
+
+to find the quotient.
+
+danger in this operation is, the user is allowed to enter 0 as variable "a"; b/0 => NAN
+
+to avoid the exception
+
+scala> def safeDivIt() = divIt(1)_
+
+
+// chaning return type as Float -- doesn't help in getting 2.5, we need to change the input types
+scala> def divIt(a:Int)(b:Int):Float = b/a
+divIt: (a: Int)(b: Int)Float
+
+scala> divIt(2)(5)
+res19: Float = 2.0
+
+// changed input types
+scala> def divIt(a:Float)(b:Float) = b/a
+divIt: (a: Float)(b: Float)Float
+
+scala> divIt(2)(5)
+res17: Float = 2.5
+
+// crazy issue, use VAR instead of DEF
+
+scala> 1/0
+java.lang.ArithmeticException: / by zero
+  ... 29 elided
+
+scala> def divIt(a:Int)(b:Int) = b/a
+divIt: (a: Int)(b: Int)Int
+
+scala> def safeDivIt() = divIt(1)_
+safeDivIt: ()Int => Int
+
+scala> divIt(5,2)
+<console>:13: error: too many arguments (2) for method divIt: (a: Int)(b: Int)Int
+       divIt(5,2)
+               ^
+
+scala> divIt(2)(5)
+res14: Int = 2
+
+scala> safeDivIt(5)
+<console>:13: error: no arguments allowed for nullary method safeDivIt: ()Int => Int
+       safeDivIt(5)
+                 ^
+
+scala> var x = safeDivIt(5)
+<console>:12: error: no arguments allowed for nullary method safeDivIt: ()Int => Int
+       var x = safeDivIt(5)
+                         ^
+scala> var safeDivIt = divIt(2)_
+safeDivIt: Int => Float = $$Lambda$1249/175168244@6344004d
+
+scala> safeDivIt(4)
+res24: Float = 2.0
+
+scala> safeDivIt(6)
+res25: Float = 3.0
+
+**** crazy issue done *****
+
+function definition => is for functions ; def main(args: Array[String]) = {//blah}
+variable definition => is for variables ; var a = 4
+
+scala challenge
+
+function definition => is for functions ; def main(args: Array[String]) = {//blah}
+		tricky => def main = 4 ; this works
+variable definition => is for variables ; var a = 4
+		tricky => var main() = main(3)_
+
+// use case for currying
+parent input need to be variable.
+child input also need to be variable.(2nd set of paranthesis)
+but child cannot change the input set by parent.
+
+child wont have the privilage to override mom's preset.(1st set of pranthesis)
+
+// parent want the kid to play with number
+// in tv there is a warning like : odd numbers are injurious to child health
+*******
+scala> def parentMoney(a:Int)(b:Int) = if(b%a == 0) println("Its moms preferred number, safe") 
+
+scala> var childMoney = parentMoney(2)_
+
+// make it a even better example
+
+Higher Order Functions:
+-----------------------
+
+pass function as a parameter, along with other normal parameters
+
+do something => actually I dont know what to do
+
+do someting => will send (data + function) to it
+
+do something => 2,3 add
+do something => 2,3 product
+
+How to pass function as a parameter;
+	fn:(Int,Int) => Int --> 2 input variables and a return type
+
+	t:(Int) => Float --> 1 input, different function name, diff return type
+
+	x :=> Int -> no input, Int return type
+
+	// crazy
+
+***	y:=> Unit // experiment worked, no return things are mentioned like this
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

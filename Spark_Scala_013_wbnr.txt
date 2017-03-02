@@ -1,0 +1,136 @@
+Hello All.
+
+Recording Started.
+
+Agenda:
+------
+
+First spark program.
+
+Word Count
+
+=> List
+=> For Loop
+
+	Very Simple: for(element <- collection) println(element)
+
+multi dimensional loops :
+
+	array => 1d 
+			[1, 2, 3]
+
+	martix => 2d
+			[1, 2, 3]
+			[4, 5, 6]
+			[7, 8, 9]
+
+			count => 3 * 3 = 9
+
+			if 3 loops => 3 * 3 * 3 => 27
+
+	pig => 5d or nd => in computers we can represent 'n'd => nesting
+		(1,{(1,{})(4,{})},3)
+
+	2 loops are needed in java
+		for(i=0; i<3; i++)
+			for(j=0; j<3; j++)
+				{}
+
+	- with filters
+	- miltiple filters
+	- multiple loops
+	- miltiple lines
+	- yeild
+		instead of round braces, use curly braces
+
+		in the world of functions => we have RETURN keyword
+		in the world of for => we have a keyword YEILD
+
+		reduce(_+_);
+
+		underscore => argument
+		order of underscores => order of arguments
+
+		scala => consice
+
+What is Map?
+	=> a logic applied on the divided data to produce intermediate results
+
+What is Reduce?
+	=> a logic applied on the intermediate data to produce a final aggregated result.
+
+		reduce() => read me like this => aggregate()
+											=>aggregate(_+_)
+													sum all the values
+							logic => "_+_"						
+											=> aggregate(_*_)
+													multiply all the values
+
+scala> var a = List.range(1,6)
+a: List[Int] = List(1, 2, 3, 4, 5)
+
+scala> a.reduceLeft(_+_)
+res12: Int = 15
+
+scala> a.map(e => e+1)
+res13: List[Int] = List(2, 3, 4, 5, 6)
+
+scala> a.map(e => e+1).reduceLeft(_+_)
+res14: Int = 20
+
+scala> a.map(e => e+1).reduceLeft(_*_)
+res15: Int = 720
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
