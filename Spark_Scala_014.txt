@@ -1,0 +1,155 @@
+Hello All,
+
+HIVE:
+----
+
+12 PB of data; 950 Nodes; California; 1020 columns; 350 M records per day(15 GB); 10 Billion;
+
+workflow => shell scripts => korn shell
+
+Partitions:
+
+x -> table name
+
+a,b,c => column names => partitions for them
+			X 
+				=> a
+					=> b
+						=> c
+							=> file.txt
+			Table
+				=> Country=US
+					=> State=California
+						=> District=FosterCity
+							=> file1.txt
+							=> file2.txt
+						=> District=PauloAlto
+							=> file3.txt
+
+what happens i your folder structure is different than the expected?
+			X
+				=> Z
+					=> Y
+						=> P
+							=> Q
+								=> R
+
+hql> show partitions x;
+
+(a=1,b=1,c=1)
+
+country, state, district
+
+(country=US, state=California, district=FosterCity)
+
+Client is interested in storing data by data wise
+	get_dt=20170301
+		part_no=1
+			file1
+		part_no=2
+			file2
+	get_dt=20170302
+
+hql> show partitions x;
+	(get_dt=20170301,part_no=1)
+	(get_dt=20170301,part_no=2)
+	(get_dt=20170302,part_no=1)
+
+	=> for 2017 => you will have 365 folders in one folder
+		=> some systems have upper limit of 200 subfolder
+			=> 
+
+hql> select * from x where get_dt=20170301; -- convinient for the user
+
+folder structure:		-- convienient for the admin
+	2017
+		03
+			01
+				part-1
+				part-2
+	for 2017 => 1 dir => 12 for months => max 31 for days
+
+point::deviation:learning => we can acheive this, this is posssible
+
+hql> load data local inpath '/from/here' into table partiton (to-here) location '/to/here'
+
+--> assume that there are no partitions in the table Y
+
+	Y
+		X
+			Z
+				=> file.txt
+
+hql> select * from Y;
+	empty set;
+
+will you get results or not?
+
+SET hive.mapred.supports.subdirectories=TRUE;
+SET mapred.input.dir.recursive=TRUE;
+
+Recap:
+-----
+What is Unit return type in scala?
+	=> void 
+
+If you have a return type, then your function definition need to have this thing?
+	=> =, equal sign
+
+var a = 0;
+def hello() = { a = a+1}
+	=> what is the return type?
+		> it will return Unit, i.e. nothing or void
+	=> why void?
+		> last line is the return value
+			> and it must be an EXPRESSION
+
+scala> var a = 0
+a: Int = 0
+
+scala> def hello() = {a = a + 1}
+hello: ()Unit
+
+scala> hello
+
+scala> hello()
+
+scala> def hello() = {a + 1}
+hello: ()Int
+
+scala> def hello() {a + 1}
+hello: ()Unit
+
+Note: 1. equal sign before curly braces --> means some return type
+		2. equal sing in the last statement --> means not an expression
+
+Can a for loop returns any value?
+	> it returns with Yield keyword
+
+Spark Tour - word count example:
+--------------------------------
+
+> val inputfile = sc.textFile("file:///home/edureka/jagadish_t/input.txt")
+
+people are not as beautiful as they look, 
+as they walk or as they talk.
+they are only as beautiful  as they love, 
+as they care as they share.
+
+> val counts = inputfile.flatMap(line => line.split(" ")).map(word => (word, 1)).reduceByKey(_+_);
+
+	(flatMap(line ⇒ line.split(" "))
+
+Our aim is to count the words in a file. 
+Create a flat map for splitting each line into words .
+
+	(map(word ⇒ (word, 1))
+
+Next, read each word as a key with a value ‘1’ (<key, value> = <word,1>) 
+using map function 
+
+	(reduceByKey(_+_))
+
+Finally, reduce those keys by adding values of similar keys.
+
+> counts.saveAsTextFile("file:///home/edureka/jagadish_t/outputFolder")
