@@ -1,0 +1,179 @@
+Hello All, Let us wait for everyone.
+
+Start Recording => Started
+
+Agenda => List
+
+Q. can you provide me the factorial value of any number(5) it is 120
+		with out using loops as well as recursion? [Jagadsih TM] :-)
+Hint: _+_ need to use; let scala do the work
+
+Answer:
+
+	scala> var a = List(1,2,3,4).reduceLeft(_*_)
+	a: Int = 24
+
+	scala> var a = List(1,2,3,4,5,6,7,8,9).reduceLeft(_*_)
+	a: Int = 362880
+
+	scala> var a = List.range(1,10).reduceLeft(_*_)
+	a: Int = 362880
+
+user => scala => code for spark => result
+
+RDD => an object has many objects inside it (a very high level collection)
+		=> Two Types of collection
+			Type1 => vector/list/array => [1,2,3,4]
+			Type2 => map/relational_array => (name, age) (dog, breed) (k,v)
+				TYPE1 has functions and TYPE2 also has functions
+
+Architect point of view: an object which has the ability to live among multiples mancines RAM
+
+RDD => 100 partitions (some pieces) => some are in Node1 ; some are on Node2; in RAM/Distributed RAM
+FILE => 100 blocks (some pieces) => some are in Node1; some are on Node2; in HDD/HDFS or DFS
+
+We always use those functions. There only the power is there.
+
+LIST:
+-----
+
+List is immutable; that mean only created once; no modification.
+
+scala> var a = List(1,2)
+
+scala> a.reverse
+res0
+
+scala> a = a.reverse
+(2,1)
+
+
+a --> object-a --> (1,2)
+
+res0 ---> object-no-name ---> (2,1)
+
+a = res0
+a ---> object-no-name ---> (2,1)
+
+immutability => relates to object => not to reference variable
+
+in the world of objects => we talk with "references"
+
+
+class BioLife {}
+class Birds extends BioLife {}
+class Reptiles extends BioLife {}
+
+scala> val x:List[Birds] = List("pigeon", "parrot", "peacock")
+
+scala> val y:List[Reptiles] = List("snake", "lizard", "crocodile")
+
+scala> val z:List[BioLife] = List("snake", "parrot")
+
+In java, covariant behaviour. I can create an object and refer it to a praent class.
+
+
+	scala> var x = List(2,3,4)
+	x: List[Int] = List(2, 3, 4)
+
+	scala> var y = 1::x
+	y: List[Int] = List(1, 2, 3, 4)
+
+	scala> for(e<-x) print(e+" ")
+	2 3 4 
+	scala> var sum = 0; x.foreach {sum += _}
+	sum: Int = 9
+
+stopped at line 80.
+
+
+Challenge:
+----------
+
+use this example w.r.t traits and show with the lists.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
