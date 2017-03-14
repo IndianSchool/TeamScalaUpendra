@@ -1,0 +1,183 @@
+Welcome Back, Next Level Scala:
+-------------------------------
+
+BigData => new functionality => like map or reduce => Hadoop => YOU KNOW THIS
+SPARK => appears scary => BIG DATA + SCALA
+SCALA => appears scary => FUSION of OOPS + FP + SUGAR SYNTAX
+
+Scala => How many ways we can write program?
+			1. Command Line, Scala Shell, Interactive, scala>
+					a. Object Oriented
+					b. Functional Oriented
+					c. Mix of them
+			2. Script Mode, dot Scala file, $ scala Demo.scala
+					a. Object Oriented
+					b. Functional Oriented
+					c. Mix of them
+			3. Class File Mode, dot Scala file, it has class(OOPs), $ scalac Demo.scala ; $ scala Demo
+					a. Object Oriented
+					b. Functional Oriented
+					c. Mix of them
+
+
+little scary or cautious part is: all these 9 modes may have different behaviours.
+
+Interactive Vs Script; some weird things:
+----------------------
+
+In Shell, 
+	redefining VAL is ok, no errors
+
+In Script,
+	redefining VAL is not allowed, error will come
+
+In Object File,
+	redefining VAL is not allowed, error will come
+
+ex: DemoVal.scala and DemoValAgain.scala
+
+Script Vs Class; some weird things:
+----------------
+
+In Shell,
+	No error, It executed
+
+In Script,
+	No error, It executed	
+
+In Class File Mode,
+	scalac, No error, It compiled
+	scala, RUNTIME ERROR, as main not found
+
+Scala is CONCISE: so too much SUGARY SYNTAX:
+-----------------
+too many shortcuts
+
+scala> var s1 = "Jyothi"
+s1: String = Jyothi
+
+scala> var s2 = "Upendra"
+s2: String = Upendra
+
+// traditional JAVA way
+scala> println("Hi Hello, Dear "+s1+" and "+s2)
+Hi Hello, Dear Jyothi and Upendra
+
+// sugary SCALA way
+scala> println(s"Hi Hello, Dear $s1 and $s2. How are you doing. $s1-$s2")
+Hi Hello, Dear Jyothi and Upendra. How are you doing. Jyothi-Upendra
+
+Scala Classes:
+---------------
+
+Below are few of the many ways we can create a class
+
+scala> class Jyothi
+defined class Jyothi
+
+scala> class Jyothi {}
+defined class Jyothi
+
+scala> class Jyothi { var a = "Jyothi"}
+defined class Jyothi
+
+scala> class Jyothi(j: String) { var a = j}
+defined class Jyothi                                                                    ^
+
+scala> class Jyothi(j: String) { var a = j; println(s"Hello, I am $a")}
+defined class Jyothi
+
+scala> class Jyothi(j: String) { var a = j; def jyoPrint {println(s"Hello, I am $a")} }
+defined class Jyothi
+
+scala> var j1 = new Jyothi("Jyothi")
+j1: Jyothi = Jyothi@57839834
+
+scala> j1
+res12: Jyothi = Jyothi@57839834
+
+scala> print(j1)
+$line31.$read$$iw$$iw$Jyothi@57839834
+scala> j1.a
+res14: String = Jyothi
+
+scala> j1.jyoPrint
+   def jyoPrint: Unit
+
+scala> j1.jyoPrint
+Hello, I am Jyothi
+
+scala> var j1 = new Jyothi("Upendra")
+j1: Jyothi = Jyothi@59c38af5
+
+scala> j1.jyoPrint
+Hello, I am Upendra
+
+scala> var j2 = new Jyothi
+<console>:12: error: not enough arguments for constructor Jyothi: (j: String)Jyothi.
+Unspecified value parameter j.
+       var j2 = new Jyothi
+                ^
+
+scala> var j2 = new Jyothi(123)
+<console>:12: error: type mismatch;
+ found   : Int(123)
+ required: String
+       var j2 = new Jyothi(123)
+                           ^
+
+scala> var j2 = new Jyothi("ijkl",123)
+<console>:12: error: too many arguments (2) for constructor Jyothi: (j: String)Jyothi
+       var j2 = new Jyothi("ijkl",123)
+                                  ^
+
+Challenges:
+-----------
+1. What to do, with an object created in shell? How to invoke it or use it?
+=
+Ans:
+scala> object Demo {
+     |   def main(args: Array[String]) {
+     |           println("Hello, World!")
+     |   }
+     | }
+defined object Demo
+
+scala> Demo.main()
+<console>:13: error: not enough arguments for method main: (args: Array[String])Unit.
+Unspecified value parameter args.
+       Demo.main()
+                ^
+
+scala> Demo
+res3: Demo.type = Demo$@61dde151
+
+scala> println(Demo)
+$line7.$read$$iw$$iw$Demo$@61dde151
+
+scala> Demo.main("hi")
+<console>:13: error: type mismatch;
+ found   : String("hi")
+ required: Array[String]
+       Demo.main("hi")
+                 ^
+
+scala> Demo.main({"hi"})
+<console>:13: error: type mismatch;
+ found   : String("hi")
+ required: Array[String]
+       Demo.main({"hi"})
+
+1. Solved:
+----------
+
+scala> var args = Array("a","b","c")
+args: Array[String] = Array(a, b, c)
+
+scala> Demo.main(args)
+Hello, World!
+
+2. How to create multiple constructors for the same class?
+=
+Ans:
+
