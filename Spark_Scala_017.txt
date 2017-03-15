@@ -1,0 +1,263 @@
+Hello All, Welcome Back:
+
+Date: 15-MAR-2017
+
+Earlier Class:
+-------------
+	1. Why Spark is Scary?
+	2. 9 different ways of thinking/coding in scala? OOPS, FP, SHELL
+	3. Demos on few comparision between OOPS, FP, SHELL
+	4. Scala Classes
+
+New Directions: Make a fair notes based on topic referring daily classes - Jyothi
+
+Recording Started:
+-----------------
+
+Few MORE deep dive in OOPS:
+---------------------------
+
+Java Constructor Usage: Code for initialization is there, used at time of creating and object.
+Scala Constructor Usage: Input Params are not the same as class members
+
+# Understanding: If we declare the input variables as VARs or VALs EXPLICITLY, there are considered as members.
+					or else not members. Default are VALs, they are not members by default as per SHELL.
+
+# Understanding: MAIN method is needed if you use SCALAC compiler, or else you will get runtime error.
+					But, MAIN method is not needed when you create class in shell.
+
+					main() => method => starting point of the code; code-compile-run
+					main() => method => not required in shell, because shell already started
+					CRAZY: why not compile error? as no syntax errors.
+
+Script Vs Class:
+----------------
+
+No Runtime Error => as the system thinks that we ran a script file
+Got Compile Time Error => as the system needs to put the HANGING LINE into some class,
+								which it didnt find.
+
+
+## code hanging in the air instead of inside a class or object
+##-----------------------------------------------------------------------------------------Demo.scala
+class User(n: String) {
+    val name: String = n
+}
+
+var u = new User(n = "Frank")
+##-----------------------------------------------------------------------------------------SCALA CONSOLE
+
+##-----------------------------------------------------------------------------------------CONSOLE
+sh-4.3$ scala Demo.scala                                                                                                                                                        
+sh-4.3$ scalac Demo.scala                                                                                                                                                       
+Demo.scala:5: error: expected class or object definition                                                                                                                        
+var u = new User(n = "Frank")                                                                                                                                                   
+^                                                                                                                                                                               
+one error found
+##-----------------------------------------------------------------------------------------CONSOLE
+
+
+
+
+
+
+## not a member understanding
+##--------------------------------------------------------------------------------------
+scala> class Teacher(name: String, exp: Int, rating: Int = 5) { var st = s"I am $name"; rating = 7; def greet = "Hello, All" }
+<console>:11: error: reassignment to val
+       class Teacher(name: String, exp: Int, rating: Int = 5) { var st = s"I am $name"; rating = 7; def greet = "Hello, All" }
+                                                                                               ^
+
+scala> class Teacher(name: String, exp: Int, var rating: Int = 5) { var st = s"I am $name"; rating = 7; def greet = "Hello, All" } 
+defined class Teacher
+
+scala> var j = new Teacher("Jagadish", 10)
+j: Teacher = Teacher@6fc28e5b
+
+scala> j.st
+res12: String = I am Jagadish
+
+scala> j.greet
+res13: String = Hello, All
+
+scala> j.rating
+res14: Int = 7
+
+scala> j.name
+<console>:13: error: value name is not a member of Teacher
+       j.name
+         ^
+
+scala> j.exp
+<console>:13: error: value exp is not a member of Teacher
+       j.exp
+         ^
+
+scala> j.rating
+res17: Int = 7
+##--------------------------------------------------------------------------------------
+
+## not a member understanding
+##--------------------------------------------------------------------------------------
+scala>  class Student(name: String) { def greet = "I am "+name+", and your favourite student"; var fullName = name+" surName" }
+defined class Student
+
+scala> var j = new Student("jagadish")
+j: Student = Student@33f2cf82
+
+scala> j.name
+<console>:13: error: value name is not a member of Student
+       j.name
+         ^
+
+scala>  class Student(var name: String) { def greet = "I am "+name+", and your favourite student" }
+defined class Student
+
+scala> var k = new Student("kalyan")
+k: Student = Student@2c978637
+
+scala> k.name
+res20: String = kalyan
+##--------------------------------------------------------------------------------------
+
+
+
+35 Design Patterns are there:
+-----------------------------
+Receipe: 
+	ingredients: some abstract classes, some interfaces, some objects
+					some interhence relationships, etc => you will get some thing
+
+Singleton Pattern => only one object can be allowed for a class
+
+Did you remember? There is one Singleton class in Hadoop Data Types? Ans: NullWritable [NullWritable.get()]
+
+X, Y, Z patterns are hidden in scala language by design;
+
+Decorator Pattern => Trait in scala
+
+Challenges:
+-----------
+1. Why name is not a member of the class, when it got created from constructor? 
+=
+Details:
+--------
+scala> class Student(name: String) { def greet = s"I am $name, and your favourite student" }
+defined class Student
+
+scala> var u = new Student("Upendra")
+u: Student = Student@66d2885c
+
+scala> var j = new Student("Jyothi")
+j: Student = Student@531ec2ca
+
+scala> u.name
+<console>:13: error: value name is not a member of Student
+       u.name
+         ^
+
+scala> u.greet
+res4: String = I am Upendra, and your favourite student
+
+2. How to load a class which got created earlier into the scala shell?
+=
+Details:
+--------
+cd to the path ; and open scala shell ; and import Student ; Student.class is available already
+Didnt work.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
