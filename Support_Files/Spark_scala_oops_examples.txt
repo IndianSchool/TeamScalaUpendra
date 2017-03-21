@@ -1,0 +1,101 @@
+/********Newfile.scala***********************/
+
+class Teacher(var name: String, val exp: Double = 6, var rating: Int = 5) 
+{ 
+  var st = s"I am $name"; 
+  rating = 7; 
+  def greet = "Hello, All" 
+  def details { println(s"I am $name with $exp yrs of experience and rating of $rating.") };
+
+}
+
+object TeacherObj {
+def main (args : Array[String]) 
+{
+  var T1 = new Teacher ("Lara");
+  var T2 = new Teacher ("Maya",9);
+  var T3 = new Teacher ("Santosh",0,0);
+T1.details;
+T2.details; 
+T3.details;
+}
+
+}
+
+
+output
+------
+sh-4.3$ scalac Newfile.scala                                                                                                                                                          
+sh-4.3$ scala TeacherObj                                                                                                                                                              
+I am Lara with 6.0 yrs of experience and rating of 7.                                                                                                                                 
+I am Maya with 9.0 yrs of experience and rating of 7.                                                                                                                                 
+I am Santosh with 0.0 yrs of experience and rating of 7. 
+
+
+********************************************************************
+
+  
+  class Teacher(var name: String, val exp: Double, var rating: Int) 
+{ 
+  def this (name : String) { this(name,0,0);   println("No Exp and Rating provided")};
+  def this (name : String , exp: Double) { this(name, exp, 0); println("No Rating provided")};
+}
+
+object TeacherObj {
+def main (args : Array[String]) 
+{
+  var T1 = new Teacher ("Lara");
+  var T2 = new Teacher ("Maya",9);
+ 
+}
+
+}
+
+output:
+-------
+sh-4.3$ scalac MultiConst.scala                                                                                                                                                       
+sh-4.3$ scala TeacherObj                                                                                                                                                              
+No Exp and Rating provided                                                                                                                                                            
+No Rating provided   
+
+
+********************************************************************************
+
+class Teacher(var name: String, val exp: Double, var rating: Int) 
+{ 
+  def this (name : String)
+  {
+  this(name,0,0);  
+  println(s"$name - No Exp and Rating provided")
+  };
+  
+  def this (name : String , exp: Double) 
+  { 
+  this(name, exp, 0); 
+  println(s"name -$name , Exp-$exp, No Rating provided")
+  };
+  
+  println(s"name -$name, Exp-$exp, rating-$rating");
+  
+}
+
+object TeacherObj {
+def main (args : Array[String]) 
+{
+  var T1 = new Teacher ("Lara");
+  var T2 = new Teacher ("Maya",9);
+  var T3 = new Teacher ("Santosh",0,0);
+ 
+}
+
+}
+
+output:
+------
+
+sh-4.3$ scala TeacherObj                                                                                                                                                             
+name -Lara, Exp-0.0, rating-0                                                                                                                                                        
+Lara - No Exp and Rating provided                                                                                                                                                    
+name -Maya, Exp-9.0, rating-0                                                                                                                                                        
+name -Maya , Exp-9.0, No Rating provided                                                                                                                                             
+name -Santosh, Exp-0.0, rating-0 
