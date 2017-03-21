@@ -1,0 +1,340 @@
+************************************************
+
+SCALA CLASSES:
+
+************************************************
+
+Below are few of the many ways we can create a class
+
+scala> class Jyothi
+defined class Jyothi
+
+scala> class Jyothi {}
+defined class Jyothi
+
+scala> class Jyothi { var a = "Jyothi"}
+defined class Jyothi
+
+scala> class Jyothi(j: String) { var a = j}
+defined class Jyothi                                                                    ^
+
+scala> class Jyothi(j: String) { var a = j; println(s"Hello, I am $a")}
+defined class Jyothi
+
+scala> class Jyothi(j: String) { var a = j; def jyoPrint {println(s"Hello, I am $a")} }
+defined class Jyothi
+
+scala> var j1 = new Jyothi("Jyothi")
+j1: Jyothi = Jyothi@57839834
+
+scala> j1
+res12: Jyothi = Jyothi@57839834
+
+scala> print(j1)
+$line31.$read$$iw$$iw$Jyothi@57839834
+scala> j1.a
+res14: String = Jyothi
+
+scala> j1.jyoPrint
+   def jyoPrint: Unit
+
+scala> j1.jyoPrint
+Hello, I am Jyothi
+
+scala> var j1 = new Jyothi("Upendra")
+j1: Jyothi = Jyothi@59c38af5
+
+scala> j1.jyoPrint
+Hello, I am Upendra
+
+scala> var j2 = new Jyothi
+<console>:12: error: not enough arguments for constructor Jyothi: (j: String)Jyothi.
+Unspecified value parameter j.
+       var j2 = new Jyothi
+                ^
+
+scala> var j2 = new Jyothi(123)
+<console>:12: error: type mismatch;
+ found   : Int(123)
+ required: String
+       var j2 = new Jyothi(123)
+                           ^
+
+scala> var j2 = new Jyothi("ijkl",123)
+<console>:12: error: too many arguments (2) for constructor Jyothi: (j: String)Jyothi
+       var j2 = new Jyothi("ijkl",123)
+                                  ^
+								  
+								  
+								  
+*****************************************************
+
+Few MORE deep dive in OOPS:
+
+*****************************************************
+
+Java Constructor Usage: Code for initialization is there, used at time of creating and object.
+Scala Constructor Usage: Input Params are not the same as class members
+
+# Understanding: If we declare the input variables as VARs or VALs EXPLICITLY, there are considered as members.
+					or else not members. Default are VALs, they are not members by default as per SHELL.
+
+# Understanding: MAIN method is needed if you use SCALAC compiler, or else you will get runtime error.
+					But, MAIN method is not needed when you create class in shell.
+
+					main() => method => starting point of the code; code-compile-run
+					main() => method => not required in shell, because shell already started
+					CRAZY: why not compile error? as no syntax errors.
+
+Script Vs Class:
+----------------
+
+No Runtime Error => as the system thinks that we ran a script file
+Got Compile Time Error => as the system needs to put the HANGING LINE into some class,
+								which it didnt find.
+
+
+## code hanging in the air instead of inside a class or object
+##-----------------------------------------------------------------------------------------Demo.scala
+class User(n: String) {
+    val name: String = n
+}
+
+var u = new User(n = "Frank")
+##-----------------------------------------------------------------------------------------SCALA CONSOLE
+
+##-----------------------------------------------------------------------------------------CONSOLE
+sh-4.3$ scala Demo.scala                                                                                                                                                        
+sh-4.3$ scalac Demo.scala                                                                                                                                                       
+Demo.scala:5: error: expected class or object definition                                                                                                                        
+var u = new User(n = "Frank")                                                                                                                                                   
+^                                                                                                                                                                               
+one error found
+##-----------------------------------------------------------------------------------------CONSOLE
+
+
+
+## not a member understanding
+##--------------------------------------------------------------------------------------
+scala> class Teacher(name: String, exp: Int, rating: Int = 5) { var st = s"I am $name"; rating = 7; def greet = "Hello, All" }
+<console>:11: error: reassignment to val
+       class Teacher(name: String, exp: Int, rating: Int = 5) { var st = s"I am $name"; rating = 7; def greet = "Hello, All" }
+                                                                                               ^
+
+scala> class Teacher(name: String, exp: Int, var rating: Int = 5) { var st = s"I am $name"; rating = 7; def greet = "Hello, All" } 
+defined class Teacher
+
+scala> var j = new Teacher("Jagadish", 10)
+j: Teacher = Teacher@6fc28e5b
+
+scala> j.st
+res12: String = I am Jagadish
+
+scala> j.greet
+res13: String = Hello, All
+
+scala> j.rating
+res14: Int = 7
+
+scala> j.name
+<console>:13: error: value name is not a member of Teacher
+       j.name
+         ^
+
+scala> j.exp
+<console>:13: error: value exp is not a member of Teacher
+       j.exp
+         ^
+
+scala> j.rating
+res17: Int = 7
+##--------------------------------------------------------------------------------------
+
+## not a member understanding
+##--------------------------------------------------------------------------------------
+scala>  class Student(name: String) { def greet = "I am "+name+", and your favourite student"; var fullName = name+" surName" }
+defined class Student
+
+scala> var j = new Student("jagadish")
+j: Student = Student@33f2cf82
+
+scala> j.name
+<console>:13: error: value name is not a member of Student
+       j.name
+         ^
+
+scala>  class Student(var name: String) { def greet = "I am "+name+", and your favourite student" }
+defined class Student
+
+scala> var k = new Student("kalyan")
+k: Student = Student@2c978637
+
+scala> k.name
+res20: String = kalyan
+##--------------------------------------------------------------------------------------
+
+
+
+35 Design Patterns are there:
+-----------------------------
+Receipe: 
+	ingredients: some abstract classes, some interfaces, some objects
+					some interhence relationships, etc => you will get some thing
+
+Singleton Pattern => only one object can be allowed for a class
+
+Did you remember? There is one Singleton class in Hadoop Data Types? Ans: NullWritable [NullWritable.get()]
+
+X, Y, Z patterns are hidden in scala language by design;
+
+Decorator Pattern => Trait in scala
+
+								  
+								  
+								  
+scala> class Kitchen(var color: String, val floorType: String = "tile") {                                                                                                       
+     |  def describe = {                                                                                                                                                        
+     |          s"The kitchen has $floorType floors with $color color"                                                                                                          
+     |  }                                                                                                                                                                       
+     | }                                                                                                                                                                        
+defined class Kitchen                                                                                                                                                           
+      ***** observe ******** how can a VAL accepts "wood" instead of "tile" ???   ---- 'tile' is a default value for FloorType used when nothing is passed.                                                                                                                                                                       
+scala> var myKitchen = new Kitchen("purple")                                                                                                                                    
+myKitchen: Kitchen = Kitchen@216e9ca3                                                                                                                                           
+                                                                                                                                                                                
+scala> myKitchen                                                                                                                                                                
+res3: Kitchen = Kitchen@216e9ca3                                                                                                                                                
+
+scala> println(myKitchen.describe)                                                                                                                                              
+The kitchen has tile floors with purple color                                                                                                                                   
+                                                                                                                                                                                
+scala> var yourKitchen = new Kitchen("brown", "wood")                                                                                                                           
+yourKitchen: Kitchen = Kitchen@157d3a45                                                                                                                                         
+                                                                                                                                                                                
+scala> println(yourKitchen.describe)                                                                                                                                            
+The kitchen has wood floors with brown color                                                                                                                                    
+**** :kind *****
+
+scala> var a = "upendra"
+a: String = upendra
+
+scala> var b = 10
+b: Int = 10
+
+scala> var c = List(1,2)
+c: List[Int] = List(1, 2)
+
+scala> :kind a
+java.lang.String's kind is A
+
+scala> :kind b
+scala.Int's kind is A
+
+scala> :kind c
+scala.collection.immutable.List's kind is A
+
+*** over ride *** 
+
+scala> class Tree { def about = { " I am made of wood " } }
+defined class Tree
+
+scala> var t = new Tree
+t: Tree = Tree@17839acd
+
+scala> t.about
+res0: String = " I am made of wood "
+
+scala> class MangoTree { def about = { "I am made of wood, but my fruits are good" } }
+defined class MangoTree
+
+scala> var m = new MangoTree
+m: MangoTree = MangoTree@162c02a2
+
+scala> m.about
+res1: String = I am made of wood, but my fruits are good
+
+
+								  
+********************************************************************************************************************************************************************								  
+ 
+ CHALLENGES:
+ 
+*******************************************************************************************************************************************************************
+
+1. What to do, with an object created in shell? How to invoke it or use it?
+=
+Ans:
+scala> object Demo {
+     |   def main(args: Array[String]) {
+     |           println("Hello, World!")
+     |   }
+     | }
+defined object Demo
+
+scala> Demo.main()
+<console>:13: error: not enough arguments for method main: (args: Array[String])Unit.
+Unspecified value parameter args.
+       Demo.main()
+                ^
+
+scala> Demo
+res3: Demo.type = Demo$@61dde151
+
+scala> println(Demo)
+$line7.$read$$iw$$iw$Demo$@61dde151
+
+scala> Demo.main("hi")
+<console>:13: error: type mismatch;
+ found   : String("hi")
+ required: Array[String]
+       Demo.main("hi")
+                 ^
+
+scala> Demo.main({"hi"})
+<console>:13: error: type mismatch;
+ found   : String("hi")
+ required: Array[String]
+       Demo.main({"hi"})
+
+1. Solved:
+----------
+
+scala> var args = Array("a","b","c")
+args: Array[String] = Array(a, b, c)
+
+scala> Demo.main(args)
+Hello, World!
+
+2. How to create multiple constructors for the same class?
+=
+Ans:
+
+
+3. Why name is not a member of the class, when it got created from constructor? 
+=
+Details:
+--------
+scala> class Student(name: String) { def greet = s"I am $name, and your favourite student" }
+defined class Student
+
+scala> var u = new Student("Upendra")
+u: Student = Student@66d2885c
+
+scala> var j = new Student("Jyothi")
+j: Student = Student@531ec2ca
+
+scala> u.name
+<console>:13: error: value name is not a member of Student
+       u.name
+         ^
+
+scala> u.greet
+res4: String = I am Upendra, and your favourite student
+
+4. How to load a class which got created earlier into the scala shell?
+=
+Details:
+--------
+cd to the path ; and open scala shell ; and import Student ; Student.class is available already
+Didnt work.
+
