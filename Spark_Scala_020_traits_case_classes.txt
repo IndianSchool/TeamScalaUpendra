@@ -1,0 +1,89 @@
+Hello Upendra..
+
+Date: 23-MAR-2017
+
+Recording Started: :-)
+
+Today the idea is => Case Classes and Traits
+
+High Level:
+-----------
+
+Java Programming => it has all the ingredients
+Ready to cook recepies => NO
+Design Patterns came into picture;
+
+Scenario => only one object need to be there => Singleton Pattern => scala => OBJECT
+Scenario => to acheive multiple inheritence lightly => Decorator Pattern => TRAIT
+Scenario => compare objects structurally => Builder Pattern => CASE CLASS
+
+Scala => like better Java
+
+String s1 = "jagadish"
+String s2 = "upendra"
+
+s1 == s2 => condition => false 
+
+String p1 = "jagadish"
+String p2 = "jagadish"
+
+p1 == p2 => condition => false
+p1.equals(p2) => condition => true
+
+p1 => an object which has jagadish => loc:a1 
+p2 => an object which has jagadish => loc:a2
+
+a1 and a2 are location in memory.
+
+p1 == p2 ? internally those locations are compared; references are compared
+
+CASE CLASS:
+-----------
+
+different with normal classes :
+
+1. scala defines a factory method for creating instances; i.e. no need to use "new" keyword
+2. contents are immutable, val is prepended to all of them; i.e. Car(val model:String, val make:String, val year:Int)
+3. scala generates 'natural' implementations of toString(), hashCode() and equals() methods automatically.
+4. case classes are always compared STRUCTURALLY, not by reference; i.e. car1 == car2 check the members/contents not the referenced objects
+5. as they are immutable, they have a copy() method; i.e with some modification a new object can be created
+6. generates apply() and unapply methods .. more on it later
+
+
+
+Traits:
+-------
+
+attributes or properties of a person. usually we recognize by looks.
+
+for example:
+
+1. when a baby born, all relatives first try to do is "finding the traits"
+		the nose is from father => trait of father
+		the eyes are from mother => trait of mother
+		trait => genetic inheritence from parents
+
+	trait => multiple inheritence here
+
+technically ;
+trait => an interface ; so you need to implement (kind off)
+trait => an abstarct class ; so you need to extend
+
+abstract class => atleast one abstract method => no body to method
+interface => all of the methods are abstract => pure abstract class => all methods no bodies
+
+
+scala => concise => no 2 things like interface or abstract class => 1 thing trait
+
+as per java => either interface of abstract class cannot be instatiated; cant create objects
+
+
+// scala_session_name
+traits_case_classes.ss 
+
+eliminate the duplicate records:
+
+scala> val lines = fromFile("/Users/jagadishtalluri/Documents/Teachability/ScalaLearning/data-sets/small-input.txt")
+scala> val haveLines = lines.getLines.toList
+scala> val uniqueLines = haveLines.distinct
+
